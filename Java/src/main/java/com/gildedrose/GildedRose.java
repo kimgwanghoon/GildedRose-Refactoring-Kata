@@ -43,15 +43,14 @@ class GildedRose {
     }
 
     public Item BackstagePasses(Item item) {
-        if (item.quality < 50) {
-            item.quality = item.quality + 1;
-            if (item.sellIn < 11) {
-                itemUpdate.IncreasedQuality(item);
-            }
-            if (item.sellIn < 6) {
-                itemUpdate.IncreasedQuality(item);
-            }
+        itemUpdate.IncreasedQuality(item);
+        if (item.sellIn < 11) {
+            itemUpdate.IncreasedQuality(item);
         }
+        if (item.sellIn < 6) {
+            itemUpdate.IncreasedQuality(item);
+        }
+
         itemUpdate.declineSellIn(item);
         if (item.sellIn < 0) {
             item.quality = 0;

@@ -1,8 +1,9 @@
 package com.gildedrose;
 
 public class ItemUpdate {
+    private final qualityMax = 50;
     public void IncreasedQuality(Item item) {
-        if (item.quality < 50) {
+        if (item.quality < qualityMax) {
             item.quality = item.quality + 1;
         }
     }

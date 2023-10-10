@@ -3,14 +3,13 @@ package com.gildedrose;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.gildedrose.ItemUpdate.*;
+
 class GildedRose {
     List<Item> items;
 
-    ItemUpdate itemUpdate;
-
     public GildedRose(List<Item> items) {
         this.items = items;
-        this.itemUpdate = new ItemUpdate();
     }
 
     public void updateQuality() {
@@ -34,24 +33,24 @@ class GildedRose {
     }
 
     public Item AgedBrie(Item item) {
-        itemUpdate.IncreasedQuality(item);
-        itemUpdate.declineSellIn(item);
+        IncreasedQuality(item);
+        declineSellIn(item);
         if (item.sellIn < 0) {
-            itemUpdate.IncreasedQuality(item);
+            IncreasedQuality(item);
         }
         return item;
     }
 
     public Item BackstagePasses(Item item) {
-        itemUpdate.IncreasedQuality(item);
+        IncreasedQuality(item);
         if (item.sellIn < 11) {
-            itemUpdate.IncreasedQuality(item);
+            IncreasedQuality(item);
         }
         if (item.sellIn < 6) {
-            itemUpdate.IncreasedQuality(item);
+            IncreasedQuality(item);
         }
 
-        itemUpdate.declineSellIn(item);
+        declineSellIn(item);
         if (item.sellIn < 0) {
             item.quality = 0;
         }
@@ -63,24 +62,22 @@ class GildedRose {
     }
 
     public Item updateDefault(Item item) {
-        itemUpdate.declineQuality(item);
-        itemUpdate.declineSellIn(item);
+        declineQuality(item);
+        declineSellIn(item);
         if (item.sellIn < 0) {
-            itemUpdate.declineQuality(item);
+            declineQuality(item);
         }
         return item;
     }
 
     public Item Conjured(Item item) {
-        itemUpdate.declineQuality(item);
-        itemUpdate.declineQuality(item);
-        itemUpdate.declineSellIn(item);
+        declineQuality(item);
+        declineQuality(item);
+        declineSellIn(item);
         if (item.sellIn < 0) {
-            itemUpdate.declineQuality(item);
-            itemUpdate.declineQuality(item);
+            declineQuality(item);
+            declineQuality(item);
         }
         return item;
     }
-
-
 }

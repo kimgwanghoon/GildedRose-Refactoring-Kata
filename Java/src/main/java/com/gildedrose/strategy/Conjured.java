@@ -2,18 +2,17 @@ package com.gildedrose.strategy;
 
 import com.gildedrose.Item;
 
-import static com.gildedrose.ItemUpdateUtil.*;
-
 public class Conjured implements ItemUpdate {
+    private static final Integer UPDATE_QUALITY_VALUE = -2;
 
     @Override
     public Item update(Item item) {
-        int quality = 2;
+        int quality = UPDATE_QUALITY_VALUE;
         declineSellIn(item);
         if (item.sellIn < 0) {
-            quality += 2;
+            quality += UPDATE_QUALITY_VALUE;
         }
-        declineQuality(item, quality);
+        updateQuality(item, quality);
         return item;
     }
 }

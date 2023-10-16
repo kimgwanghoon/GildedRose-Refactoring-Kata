@@ -2,18 +2,17 @@ package com.gildedrose.strategy;
 
 import com.gildedrose.Item;
 
-import static com.gildedrose.ItemUpdateUtil.*;
-
 public class AgedBrie implements ItemUpdate {
+    private static final Integer UPDATE_QUALITY_VALUE = 1;
 
     @Override
     public Item update(Item item) {
-        int quality = 1;
+        int quality = UPDATE_QUALITY_VALUE;
         declineSellIn(item);
         if (item.sellIn < 0) {
-            quality += 1;
+            quality += UPDATE_QUALITY_VALUE;
         }
-        IncreasedQuality(item, quality);
+        updateQuality(item, quality);
         return item;
     }
 }

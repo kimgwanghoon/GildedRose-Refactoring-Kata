@@ -2,6 +2,10 @@ package com.gildedrose;
 
 import com.gildedrose.strategy.*;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Supplier;
+
 class GildedRose {
     Item[] items;
 
@@ -10,25 +14,8 @@ class GildedRose {
     }
 
     public void updateQuality() {
-        for(Item item : items) {
-            itemUpdate(item);
+        for (Item item : items) {
+            ItemFactory.getItemInstance(item).update(item);
         }
     }
-
-    public Item itemUpdate(Item item) {
-        if (item.name.equals("Aged Brie")) {
-            return new AgedBrie().update(item);
-        }
-        if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-            return new BackstagePasses().update(item);
-        }
-        if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
-            return new Sulfuras().update(item);
-        }
-        if (item.name.equals("Conjured Mana Cake")) {
-            return new Conjured().update(item);
-        }
-        return new ItemDefault().update(item);
-    }
-
 }

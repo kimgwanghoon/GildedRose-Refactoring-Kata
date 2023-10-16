@@ -2,24 +2,25 @@ package com.gildedrose.strategy;
 
 import com.gildedrose.Item;
 
-import static com.gildedrose.ItemUpdateUtil.*;
-
 public class BackstagePasses implements ItemUpdate {
+    private static final Integer UPDATE_QUALITY_VALUE = 1;
+    private static final Integer FIRST_QUALITY_IMPROVEMENT = 10;
+    private static final Integer SECOND_QUALITY_IMPROVEMENT = 5;
 
     @Override
     public Item update(Item item) {
-        int quality = 1;
-        if (item.sellIn <= 10) {
-            quality += 1;
+        int quality = UPDATE_QUALITY_VALUE;
+        if (item.sellIn <= FIRST_QUALITY_IMPROVEMENT) {
+            quality += UPDATE_QUALITY_VALUE;
         }
-        if (item.sellIn <= 5) {
-            quality += 1;
+        if (item.sellIn <= SECOND_QUALITY_IMPROVEMENT) {
+            quality += UPDATE_QUALITY_VALUE;
         }
         declineSellIn(item);
-        IncreasedQuality(item, quality);
         if (item.sellIn < 0) {
-            declineQuality(item, item.quality);
+            quality = -item.quality;
         }
+        updateQuality(item, quality);
         return item;
     }
 }

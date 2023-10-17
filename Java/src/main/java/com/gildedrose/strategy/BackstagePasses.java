@@ -8,7 +8,7 @@ public class BackstagePasses implements ItemUpdate {
     private static final Integer SECOND_QUALITY_IMPROVEMENT = 5;
 
     @Override
-    public Item update(Item item) {
+    public void update(Item item) {
         int quality = UPDATE_QUALITY_VALUE;
         if (item.sellIn <= FIRST_QUALITY_IMPROVEMENT) {
             quality += UPDATE_QUALITY_VALUE;
@@ -20,7 +20,6 @@ public class BackstagePasses implements ItemUpdate {
         if (item.sellIn < 0) {
             quality = -item.quality;
         }
-        updateQuality(item, quality);
-        return item;
+        increaseQuality(item, quality);
     }
 }

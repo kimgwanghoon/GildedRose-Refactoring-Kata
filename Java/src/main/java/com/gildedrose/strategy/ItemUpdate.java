@@ -6,12 +6,19 @@ public interface ItemUpdate {
     Integer QUALITY_MAX = 50;
     Integer QUALITY_MIN = 0;
 
-    Item update(Item item);
+    void update(Item item);
 
-    default void updateQuality(Item item, int value) {
+    default void increaseQuality(Item item, int value) {
         if (item.quality < QUALITY_MAX) {
             item.quality += value;
-            validatedQuality(item);
+            validatedQualityMax(item);
+        }
+    }
+
+    default void declineQuality(Item item, int value) {
+        if (item.quality > QUALITY_MIN) {
+            item.quality -= value;
+            validatedQualityMin(item);
         }
     }
 
@@ -19,10 +26,13 @@ public interface ItemUpdate {
         item.sellIn = item.sellIn - 1;
     }
 
-    default void validatedQuality(Item item) {
+    default void validatedQualityMax(Item item) {
         if (item.quality > QUALITY_MAX) {
             item.quality = QUALITY_MAX;
         }
+    }
+
+    default void validatedQualityMin(Item item) {
         if (item.quality < QUALITY_MIN) {
             item.quality = QUALITY_MIN;
         }
